@@ -1,0 +1,60 @@
+version: '3'
+services:
+  express:
+    container_name: express
+    build: .
+    command: npm run dev
+    restart: unless-stopped
+    ports:
+      - 3000:3000
+    environment:
+      DATABASE_HOST: postgres-db
+    volumes:
+      - ./:/src/
+      - nodemodules:/src/node_modules
+    depends_on:
+      - postgres-app
+      - mysql-app
+    networks:
+      - app-connect
+
+  postgres-app:
+    container_name: postgres-app
+    image: postgres:11
+    restart: unless-stopped
+    volumes:
+      - postgres-data:/data
+    environment:
+      POSTGRES_DB: dev
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: admin
+    ports:
+      - '5432:5432'
+    networks:
+      - app-connect
+
+  mysql-app:
+    container_name: mysql-app
+    image: mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=admin
+      - MYSQL_DATABASE=admin
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+      - MYSQL_ROOT_HOST=%
+    ports:
+      - '3306:3306'
+    volumes:
+      - mysql-data:/data
+    command: --default-authentication-plugin=mysql_native_password
+    networks:
+      - app-connect
+
+volumes:
+  mysql-data:
+  postgres-data:
+  nodemodules: {}
+
+networks:
+  app-connect:
+    driver: bridge
