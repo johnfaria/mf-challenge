@@ -8,11 +8,11 @@ services:
     ports:
       - 3000:3000
     environment:
-      DATABASE_HOST_MYSQL: mysql-app
-      DATABASE_HOST_PG: postgres-app
+      MYSQL_DATABASE_HOST: mysql-app
+      PG_DATABASE_HOST: postgres-app
     volumes:
       - ./:/src/
-      # - nodemodules:/src/node_modules
+    #   # - nodemodules:/src/node_modules
     depends_on:
       - postgres-app
       - mysql-app
@@ -26,8 +26,8 @@ services:
     volumes:
       - postgres-data:/data
     environment:
-      POSTGRES_DB: dev
-      POSTGRES_USER: postgres
+      POSTGRES_DB: admin
+      POSTGRES_USER: admin
       POSTGRES_PASSWORD: admin
     ports:
       - '5432:5432'

@@ -10,7 +10,7 @@ export const tokenValidation = async (
   next: NextFunction
 ): Promise<void> => {
   try {
-    const token = req.header('auth-token')
+    const token = req.header('Authorization')
 
     if (!token) {
       res.status(401).json({ code: 401, message: 'Access denied' })

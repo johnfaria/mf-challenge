@@ -1,5 +1,25 @@
 {
   "App": {
-    "msg": "Hello"
+    "PORT": 3000,
+    "auth": {
+      "key": "secret",
+      "expires_in_seconds": 3600
+    },
+    "database": {
+      "mysql": {
+        "host": "localhost",
+        "port": "3306",
+        "username": "admin",
+        "password": "admin",
+        "database": "test"
+      },
+      "postgres": {
+        "host": "localhost",
+        "port": "5432",
+        "username": "admin",
+        "password": "admin",
+        "database": "test"
+      }
+    }
   }
 }

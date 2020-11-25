@@ -4,6 +4,8 @@ WORKDIR /src
 
 ADD package.json /src
 
+RUN yarn global add typescript
+
 RUN yarn install --silent
 
 ADD . /src

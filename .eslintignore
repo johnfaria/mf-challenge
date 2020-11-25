@@ -7,5 +7,6 @@ build/
 dist/
 tools/
 
+ormconfig.js
 jest.config.js
 test/jest.config.js
