@@ -4,9 +4,12 @@ import { Server } from 'http'
 import { connectDB } from './database'
 import contactsRoute from './routes/contacts.route'
 import authRoute from './routes/auth.route'
+import { Connection } from 'typeorm'
 
 export class SetupServer {
   private server?: Server
+  private mysqldatabase?: Connection
+  private pgdatabase?: Connection
 
   constructor(private port = config.get('App.PORT'), private app = express()) {}
 
@@ -25,7 +28,14 @@ export class SetupServer {
   }
 
   private async startDatabase(): Promise<void> {
-    await connectDB()
+    const db = await connectDB()
+    this.pgdatabase = db.pg
+    this.mysqldatabase = db.mysql
+  }
+
+  public async closeDatabase(): Promise<void> {
+    await this.pgdatabase?.close()
+    await this.mysqldatabase?.close()
   }
 
   public async SetupExpress(): Promise<void> {

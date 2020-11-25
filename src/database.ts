@@ -1,9 +1,13 @@
-import { createConnection } from 'typeorm'
+import { Connection, createConnection } from 'typeorm'
 
-export async function connectDB(): Promise<void> {
-  await createConnection('postgresql-connection')
+export async function connectDB(): Promise<{
+  pg: Connection
+  mysql: Connection
+}> {
+  const pg = await createConnection('postgresql-connection')
   console.log('Connected to database postgres')
 
-  await createConnection('mysql-connection')
+  const mysql = await createConnection('mysql-connection')
   console.log('Connected to database mysql')
+  return { pg, mysql }
 }
