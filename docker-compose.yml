@@ -3,15 +3,16 @@ services:
   express:
     container_name: express
     build: .
-    command: npm run dev
+    command: yarn dev
     restart: unless-stopped
     ports:
       - 3000:3000
     environment:
-      DATABASE_HOST: postgres-db
+      DATABASE_HOST_MYSQL: mysql-app
+      DATABASE_HOST_PG: postgres-app
     volumes:
       - ./:/src/
-      - nodemodules:/src/node_modules
+      # - nodemodules:/src/node_modules
     depends_on:
       - postgres-app
       - mysql-app
@@ -53,7 +54,7 @@ services:
 volumes:
   mysql-data:
   postgres-data:
-  nodemodules: {}
+  # nodemodules: {}
 
 networks:
   app-connect:
