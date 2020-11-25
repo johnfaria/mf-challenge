@@ -11,7 +11,7 @@ module.exports = [
     database: config.get("App.database.mysql.database"),
     synchronize: true,
     logging: false,
-    entities: [`dist/src/entity/mysql/*.js`],
+    entities: [config.get("App.database.mysql.entities")],
   },
   {
     name: 'postgresql-connection',
@@ -23,6 +23,6 @@ module.exports = [
     database: config.get("App.database.postgres.database"),
     synchronize: true,
     logging: false,
-    entities: [`dist/src/entity/pg/*.js`],
+    entities: [config.get("App.database.postgres.entities")],
   },
 ]

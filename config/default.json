@@ -11,15 +11,21 @@
         "port": 3306,
         "username": "admin",
         "password": "admin",
-        "database": "admin"
+        "database": "admin",
+        "entities": "./dist/src/entity/mysql/*.js"
       },
       "postgres": {
         "host": "localhost",
         "port": 5432,
         "username": "admin",
         "password": "admin",
-        "database": "admin"
+        "database": "admin",
+        "entities": "./dist/src/entity/pg/*.js"
       }
+    },
+    "logger": {
+      "enabled": true,
+      "level": "info"
     }
   }
 }

@@ -18,6 +18,7 @@ export async function signUp(req: Request, res: Response): Promise<void> {
   )
 
   res
+    .status(201)
     .header('Authorization', token)
     .json(_.omit(result, ['password', 'id', 'updatedAt']))
 }

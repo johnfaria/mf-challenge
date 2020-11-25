@@ -27,3 +27,11 @@ Especificações do Cliente VareJão:
 - Em anexo está o sql de criação da tabela
 
 A criação de um ambiente de testes usando Docker para simular o banco de dados do cliente é altamente recomendada. A solução poderá ser desenvolvida em Golang ou Node.js. Fique livre para desenhar a solução da maneira que achar mais conveniente e supor qualquer cenário que não foi abordado nas especificações acima. Se, por qualquer motivo, você não consiga completar este teste, recomendamos que nos encaminhe o que foi desenvolvido de qualquer maneira. A falta de cumprimento de alguns dos requisitos aqui descritos não implica necessariamente na desconsideração do candidato.
+
+
+# Usage
+
+~~~bash
+docker-compose run --rm express yarn test
+~~~
+
