@@ -1,5 +1,9 @@
 {
   "App": {
-    "PORT": 3000
+    "PORT": 3000,
+    "auth": {
+      "key": "secret", 
+      "expires_in_seconds": 3600
+    }
   }
 }

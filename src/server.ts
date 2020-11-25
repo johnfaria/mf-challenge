@@ -3,6 +3,7 @@ import express, { Application } from 'express'
 import { Server } from 'http'
 import { connectDB } from './database'
 import contactsRoute from './routes/contacts.route'
+import authRoute from './routes/auth.route'
 
 export class SetupServer {
   private server?: Server
@@ -39,5 +40,6 @@ export class SetupServer {
 
   private controllers(): void {
     this.app.use('/api/', contactsRoute)
+    this.app.use('/auth/', authRoute)
   }
 }
