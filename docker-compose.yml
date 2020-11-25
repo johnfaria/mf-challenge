@@ -12,7 +12,6 @@ services:
       PG_DATABASE_HOST: postgres-app
     volumes:
       - ./:/src/
-    #   # - nodemodules:/src/node_modules
     depends_on:
       - postgres-app
       - mysql-app
@@ -51,10 +50,21 @@ services:
     networks:
       - app-connect
 
+  e2e-tests:
+    command: yarn test
+    depends_on:
+      - postgres-app
+      - mysql-app
+    networks:
+      - app-connect
+    build: .
+    environment:
+      MYSQL_DATABASE_HOST: mysql-app
+      PG_DATABASE_HOST: postgres-app
+
 volumes:
   mysql-data:
   postgres-data:
-  # nodemodules: {}
 
 networks:
   app-connect:
