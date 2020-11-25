@@ -31,7 +31,25 @@ A criação de um ambiente de testes usando Docker para simular o banco de dados
 
 # Usage
 
+### start
+
+~~~bash
+yarn install
+docker compose up
+~~~
+
+### dev
+
+~~~bash
+yarn install
+docker-compose run --rm express yarn dev
+~~~
+
+### test
+
 ~~~bash
 docker-compose run --rm express yarn test
 ~~~
+
+
 
