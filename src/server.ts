@@ -1,10 +1,13 @@
 import config from 'config'
 import express, { Application } from 'express'
 import { Server } from 'http'
+import { Connection } from 'typeorm'
+import logger from './utils/logger'
 import { connectDB } from './database'
 import contactsRoute from './routes/contacts.route'
 import authRoute from './routes/auth.route'
-import { Connection } from 'typeorm'
+import { notFound } from './middleware/pagenotfound.middleware'
+import { errorHandler } from './middleware/errorhandler.middleware'
 
 export class SetupServer {
   private server?: Server
@@ -18,7 +21,10 @@ export class SetupServer {
   }
 
   public startServer(): void {
-    this.server = this.app.listen(this.port)
+    if (this.pgdatabase?.isConnected && this.mysqldatabase?.isConnected) {
+      this.server = this.app.listen(this.port)
+      logger.info(`Server listen on port ${this.port}`)
+    }
   }
 
   public closeServer(): void {
@@ -51,5 +57,7 @@ export class SetupServer {
   private controllers(): void {
     this.app.use('/api/', contactsRoute)
     this.app.use('/auth/', authRoute)
+    this.app.use('*', notFound)
+    this.app.use(errorHandler)
   }
 }
